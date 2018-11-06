@@ -70,22 +70,18 @@ class ViewController: UIViewController, ARSCNViewDelegate
     plane.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
 
     let planeNode = SCNNode(geometry: plane)
-    planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1.0, 0.0, 0.0)
+    planeNode.eulerAngles.x = -Float.pi / 2
 
-    let modelScene = SCNScene(named: "art.scnassets/Squirtle/Squirtle.scn")
-    guard let modelNode = modelScene?.rootNode.childNode(withName: "Squirtle", recursively: true)
-    else
+    if let modelScene = SCNScene(named: "art.scnassets/Squirtle/Squirtle.scn"),
+       let modelNode = modelScene.rootNode.childNodes.first
     {
-      fatalError("Error loading model node")
+      modelNode.eulerAngles.x = .pi / 2
+      modelNode.scale = SCNVector3(0.05, 0.05, 0.05)
+      planeNode.addChildNode(modelNode)
     }
-
-    modelNode.position = SCNVector3(planeNode.transform.m41,
-                                    planeNode.transform.m42 + (modelNode.boundingBox.max.y - modelNode.boundingBox.min.y) * 0.5,
-                                    planeNode.transform.m43)
 
     let node = SCNNode()
     node.addChildNode(planeNode)
-    node.addChildNode(modelNode)
 
     return node
   }
