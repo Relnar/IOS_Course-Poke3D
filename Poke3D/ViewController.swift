@@ -39,6 +39,7 @@ class ViewController: UIViewController, ARSCNViewDelegate
     if let imagesToTrack = ARReferenceImage.referenceImages(inGroupNamed: "Pokemon Cards", bundle: Bundle.main)
     {
       configuration.trackingImages = imagesToTrack
+      configuration.maximumNumberOfTrackedImages = 1
     }
 
     // Run the view's session
@@ -55,31 +56,37 @@ class ViewController: UIViewController, ARSCNViewDelegate
 
   // MARK: - ARSCNViewDelegate
 
-/*
   // Override to create and configure nodes for anchors added to the view's session.
   func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode?
   {
+    guard let imageAnchor = anchor as? ARImageAnchor
+    else
+    {
+      return nil
+    }
+
+    let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width,
+                         height: imageAnchor.referenceImage.physicalSize.height)
+    plane.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
+
+    let planeNode = SCNNode(geometry: plane)
+    planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1.0, 0.0, 0.0)
+
+    let modelScene = SCNScene(named: "art.scnassets/Squirtle/Squirtle.scn")
+    guard let modelNode = modelScene?.rootNode.childNode(withName: "Squirtle", recursively: true)
+    else
+    {
+      fatalError("Error loading model node")
+    }
+
+    modelNode.position = SCNVector3(planeNode.transform.m41,
+                                    planeNode.transform.m42 + (modelNode.boundingBox.max.y - modelNode.boundingBox.min.y) * 0.5,
+                                    planeNode.transform.m43)
+
     let node = SCNNode()
+    node.addChildNode(planeNode)
+    node.addChildNode(modelNode)
 
     return node
-  }
-*/
-
-  func session(_ session: ARSession, didFailWithError error: Error)
-  {
-    // Present an error message to the user
-
-  }
-
-  func sessionWasInterrupted(_ session: ARSession)
-  {
-    // Inform the user that the session has been interrupted, for example, by presenting an overlay
-
-  }
-
-  func sessionInterruptionEnded(_ session: ARSession)
-  {
-    // Reset tracking and/or remove existing anchors if consistent tracking is required
-
   }
 }
