@@ -5,19 +5,22 @@
   },
   "resources" : [
     {
-      "filename" : "chespin-breakthrough-bkt-7.arreferenceimage"
+      "filename" : "Chespin.arreferenceimage"
     },
     {
-      "filename" : "dedenne-breakthrough-bkt-57.arreferenceimage"
+      "filename" : "Darkrai.arreferenceimage"
     },
     {
-      "filename" : "froakie-breakthrough-bkt-46.arreferenceimage"
+      "filename" : "Dedenne.arreferenceimage"
     },
     {
-      "filename" : "raichu-next-destinies-nxd-40-ptcgo-1.arreferenceimage"
+      "filename" : "Froakie.arreferenceimage"
     },
     {
-      "filename" : "squirtle-plasma-storm-pls-24-ptcgo-1.arreferenceimage"
+      "filename" : "RaichuF.arreferenceimage"
+    },
+    {
+      "filename" : "Squirtle.arreferenceimage"
     }
   ]
 }

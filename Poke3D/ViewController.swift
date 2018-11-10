@@ -27,6 +27,8 @@ class ViewController: UIViewController, ARSCNViewDelegate
 
     // Show statistics such as fps and timing information
     sceneView.showsStatistics = true
+
+    sceneView.autoenablesDefaultLighting = true
   }
 
   override func viewWillAppear(_ animated: Bool)
@@ -39,11 +41,39 @@ class ViewController: UIViewController, ARSCNViewDelegate
     if let imagesToTrack = ARReferenceImage.referenceImages(inGroupNamed: "Pokemon Cards", bundle: Bundle.main)
     {
       configuration.trackingImages = imagesToTrack
-      configuration.maximumNumberOfTrackedImages = 1
+      configuration.maximumNumberOfTrackedImages = 6
     }
 
     // Run the view's session
     sceneView.session.run(configuration)
+  }
+
+  override func viewDidAppear(_ animated: Bool)
+  {
+    super.viewDidAppear(animated)
+
+    // Enable flashlight
+    if let device = AVCaptureDevice.default(for: .video),
+       let input = try? AVCaptureDeviceInput.init(device: device),
+       device.hasFlash, device.hasTorch
+    {
+      var torch = input.device.torchMode
+
+      switch torch {
+      case .off:
+        torch = .on
+//        sender.setBackgroundImage( imageLiteral(resourceName: "torch_off"), for: UIControlState.normal)
+//      case .on:
+//        torch = .off
+//        sender.setBackgroundImage( imageLiteral(resourceName: "torch_on"), for: UIControlState.normal)
+      default:
+        break
+      }
+
+      try? input.device.lockForConfiguration()
+      input.device.torchMode = torch
+      input.device.unlockForConfiguration()
+    }
   }
 
   override func viewWillDisappear(_ animated: Bool)
@@ -72,11 +102,24 @@ class ViewController: UIViewController, ARSCNViewDelegate
     let planeNode = SCNNode(geometry: plane)
     planeNode.eulerAngles.x = -Float.pi / 2
 
-    if let modelScene = SCNScene(named: "art.scnassets/Squirtle/Squirtle.scn"),
+    if let modelScene = SCNScene(named: "art.scnassets/\(imageAnchor.referenceImage.name!)/\(imageAnchor.referenceImage.name!).scn"),
        let modelNode = modelScene.rootNode.childNodes.first
     {
+      let minSize = CGFloat.minimum(imageAnchor.referenceImage.physicalSize.width,
+                                    imageAnchor.referenceImage.physicalSize.height)
       modelNode.eulerAngles.x = .pi / 2
-      modelNode.scale = SCNVector3(0.05, 0.05, 0.05)
+      let boundingBox = modelNode.boundingBox
+      var boundingBoxSize = boundingBox.max - boundingBox.min
+      let boundingBoxSizeX = boundingBoxSize.x
+      boundingBoxSize.x = Float.minimum(boundingBoxSizeX, boundingBoxSize.z)
+      boundingBoxSize.z = Float.minimum(boundingBoxSizeX, boundingBoxSize.z)
+      modelNode.scale = SCNVector3(imageAnchor.referenceImage.physicalSize.width, minSize, imageAnchor.referenceImage.physicalSize.height) / boundingBoxSize
+      modelNode.pivot = SCNMatrix4MakeTranslation(-modelNode.position.x, -modelNode.position.y, -modelNode.position.z)
+      modelNode.position = SCNVector3(float3(0.0))
+
+//      modelNode.scale = SCNVector3(1.0, 1.0, 1.0) / (boundingBox.max - boundingBox.min)
+//      modelNode.scale.maximize(max: SCNVector3(float3(1.0)))
+      print(modelNode.scale)
       planeNode.addChildNode(modelNode)
     }
 

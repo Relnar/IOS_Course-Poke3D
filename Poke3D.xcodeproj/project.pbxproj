@@ -13,6 +13,7 @@
 		1A55DE48218E3B5700B96ECD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A55DE46218E3B5700B96ECD /* Main.storyboard */; };
 		1A55DE4A218E3B5700B96ECD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A55DE49218E3B5700B96ECD /* Assets.xcassets */; };
 		1A55DE4D218E3B5700B96ECD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A55DE4B218E3B5700B96ECD /* LaunchScreen.storyboard */; };
+		1AB8137321924A1B004893A3 /* SCNVector3Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB8137221924A1B004893A3 /* SCNVector3Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1A55DE49218E3B5700B96ECD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A55DE4C218E3B5700B96ECD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A55DE4E218E3B5700B96ECD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AB8137221924A1B004893A3 /* SCNVector3Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				1A55DE40218E3B5700B96ECD /* AppDelegate.swift */,
 				1A55DE42218E3B5700B96ECD /* art.scnassets */,
 				1A55DE44218E3B5700B96ECD /* ViewController.swift */,
+				1AB8137221924A1B004893A3 /* SCNVector3Extensions.swift */,
 				1A55DE46218E3B5700B96ECD /* Main.storyboard */,
 				1A55DE49218E3B5700B96ECD /* Assets.xcassets */,
 				1A55DE4B218E3B5700B96ECD /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB8137321924A1B004893A3 /* SCNVector3Extensions.swift in Sources */,
 				1A55DE45218E3B5700B96ECD /* ViewController.swift in Sources */,
 				1A55DE41218E3B5700B96ECD /* AppDelegate.swift in Sources */,
 			);
