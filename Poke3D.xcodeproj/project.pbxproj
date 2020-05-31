@@ -102,6 +102,7 @@
 				TargetAttributes = {
 					1A55DE3C218E3B5700B96ECD = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -300,7 +301,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heatherprod.Poke3D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -319,7 +320,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heatherprod.Poke3D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

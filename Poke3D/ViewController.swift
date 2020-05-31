@@ -118,7 +118,7 @@ class ViewController: UIViewController, ARSCNViewDelegate
       boundingBoxSize.z = Float.minimum(boundingBoxSizeX, boundingBoxSize.z)
       modelNode.scale = SCNVector3(imageAnchor.referenceImage.physicalSize.width, minSize, imageAnchor.referenceImage.physicalSize.height) / boundingBoxSize
       modelNode.pivot = SCNMatrix4MakeTranslation(-modelNode.position.x, -modelNode.position.y, -modelNode.position.z)
-      modelNode.position = SCNVector3(float3(0.0))
+      modelNode.position = SCNVector3(SIMD3<Float>(repeating: 0.0))
 
 //      modelNode.scale = SCNVector3(1.0, 1.0, 1.0) / (boundingBox.max - boundingBox.min)
 //      modelNode.scale.maximize(max: SCNVector3(float3(1.0)))
