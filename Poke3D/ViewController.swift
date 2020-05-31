@@ -107,7 +107,10 @@ class ViewController: UIViewController, ARSCNViewDelegate
     {
       let minSize = CGFloat.minimum(imageAnchor.referenceImage.physicalSize.width,
                                     imageAnchor.referenceImage.physicalSize.height)
-      modelNode.eulerAngles.x = .pi / 2
+
+      // Rotate the pitch to be able to see the model face-to-face when the angle is almost edge-on.
+      modelNode.eulerAngles.x = .pi / 3
+
       let boundingBox = modelNode.boundingBox
       var boundingBoxSize = boundingBox.max - boundingBox.min
       let boundingBoxSizeX = boundingBoxSize.x
@@ -119,7 +122,7 @@ class ViewController: UIViewController, ARSCNViewDelegate
 
 //      modelNode.scale = SCNVector3(1.0, 1.0, 1.0) / (boundingBox.max - boundingBox.min)
 //      modelNode.scale.maximize(max: SCNVector3(float3(1.0)))
-      print(modelNode.scale)
+//      print(modelNode.scale)
       planeNode.addChildNode(modelNode)
     }
 
